@@ -1,27 +1,80 @@
 # AWS Networking Lab
 
-A hands-on AWS networking project demonstrating how an EC2 instance communicates with the internet through a VPC, subnet, route table, Internet Gateway, Network ACL, and Security Group.
+A hands-on AWS VPC lab for tracing connectivity between an internet client and an EC2-hosted web server.
 
-## Project Overview
+## Problem & Solution
 
-This lab was built to understand and troubleshoot the complete network path between an internet client and an AWS EC2 instance.
+- **Problem:** When a server is unreachable, the blocking layer can be difficult to identify across routes and network controls.
+- **Approach:** The lab demonstrates traffic flow through a subnet, route table, Internet Gateway, Network ACL, and Security Group.
+- **Outcome:** Controlled failures show how to isolate network issues one layer at a time.
 
-The environment includes:
+## Screenshots
 
-- Custom AWS VPC
-- Public subnet
-- Internet Gateway
-- Route table
-- Network ACL
-- Security Group
-- Ubuntu 24.04 EC2 instance
-- Nginx web server
+<table>
+  <tr>
+    <td align="center" valign="top">
+      <img src="docs/screenshots/vpc-subnets.png" alt="VPC Subnets" width="420">
+      <br><sub>VPC Subnets</sub>
+    </td>
+    <td align="center" valign="top">
+      <img src="docs/screenshots/route-tables.png" alt="Route Tables" width="420">
+      <br><sub>Route Tables</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
+      <img src="docs/screenshots/security-groups.png" alt="Security Groups" width="420">
+      <br><sub>Security Groups</sub>
+    </td>
+    <td align="center" valign="top">
+      <img src="docs/screenshots/web-sg-inbound.png" alt="Web Security Group Inbound Rules" width="420">
+      <br><sub>Web Security Group Inbound Rules</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
+      <img src="docs/screenshots/app-sg-inbound.png" alt="Application Security Group Inbound Rules" width="420">
+      <br><sub>Application Security Group Inbound Rules</sub>
+    </td>
+    <td align="center" valign="top">
+      <img src="docs/screenshots/app-sg-outbound.png" alt="Application Security Group Outbound Rules" width="420">
+      <br><sub>Application Security Group Outbound Rules</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
+      <img src="docs/screenshots/db-sg-inbound.png" alt="Database Security Group Inbound Rules" width="420">
+      <br><sub>Database Security Group Inbound Rules</sub>
+    </td>
+    <td align="center" valign="top">
+      <img src="docs/screenshots/db-sg-outbound.png" alt="Database Security Group Outbound Rules" width="420">
+      <br><sub>Database Security Group Outbound Rules</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
+      <img src="docs/screenshots/running-instances.png" alt="Running EC2 Instances" width="420">
+      <br><sub>Running EC2 Instances</sub>
+    </td>
+    <td align="center" valign="top">
+      <img src="docs/screenshots/connection-successful.png" alt="Successful Connectivity Test" width="420">
+      <br><sub>Successful Connectivity Test</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top">
+      <img src="docs/screenshots/connection-troubleshooting.png" alt="Connectivity Troubleshooting" width="420">
+      <br><sub>Connectivity Troubleshooting</sub>
+    </td>
+    <td></td>
+  </tr>
+</table>
 
-The lab also includes controlled networking tests where Security Group and Network ACL rules were intentionally changed to observe how they affect connectivity.
+## Architecture Diagram
 
-> **Scope:** This repository is a lab record with documentation and screenshots. It does not include Terraform, CloudFormation, or scripts to recreate the AWS resources. The CIDRs and settings below describe this lab and should be adapted to your own VPC.
+![AWS Networking Lab Architecture](docs/screenshots/was-networking-lab-architecture.drawio.png)
 
-## Architecture
+### Architecture Notes
 
 The lab uses a simplified representation of the AWS networking components involved in internet connectivity:
 
@@ -58,93 +111,46 @@ HTTP Response
 ```
 
 The diagram is intentionally simplified. The route table determines where traffic is routed, while Network ACLs and Security Groups provide traffic filtering at different layers.
-## Architecture Diagram
 
-![AWS Networking Lab Architecture](docs/screenshots/was-networking-lab-architecture.drawio.png)
+## Project Details
+
+### Project Overview
 
 
-## Screenshots
+This lab was built to understand and troubleshoot the complete network path between an internet client and an AWS EC2 instance.
 
-### VPC and Subnet Configuration
+The environment includes:
 
-The VPC and subnet configuration used for this networking lab.
+- Custom AWS VPC
+- Public subnet
+- Internet Gateway
+- Route table
+- Network ACL
+- Security Group
+- Ubuntu 24.04 EC2 instance
+- Nginx web server
 
-![VPC Subnets](docs/screenshots/vpc-subnets.png)
+The lab also includes controlled networking tests where Security Group and Network ACL rules were intentionally changed to observe how they affect connectivity.
 
-### Route Tables
+> **Scope:** This repository is a lab record with documentation and screenshots. It does not include Terraform, CloudFormation, or scripts to recreate the AWS resources. The CIDRs and settings below describe this lab and should be adapted to your own VPC.
 
-Route table configuration showing how network traffic is routed.
 
-![Route Tables](docs/screenshots/route-tables.png)
+### AWS Infrastructure
 
-### Security Groups
 
-Security groups configured for the web, application, and database tiers.
-
-![Security Groups](docs/screenshots/security-groups.png)
-
-### Web Security Group — Inbound Rules
-
-Inbound traffic rules for the web tier.
-
-![Web Security Group Inbound Rules](docs/screenshots/web-sg-inbound.png)
-
-### Application Security Group — Inbound Rules
-
-Inbound traffic rules for the application tier.
-
-![Application Security Group Inbound Rules](docs/screenshots/app-sg-inbound.png)
-
-### Application Security Group — Outbound Rules
-
-Outbound traffic rules for the application tier.
-
-![Application Security Group Outbound Rules](docs/screenshots/app-sg-outbound.png)
-
-### Database Security Group — Inbound Rules
-
-Inbound traffic rules for the database tier.
-
-![Database Security Group Inbound Rules](docs/screenshots/db-sg-inbound.png)
-
-### Database Security Group — Outbound Rules
-
-Outbound traffic rules for the database tier.
-
-![Database Security Group Outbound Rules](docs/screenshots/db-sg-outbound.png)
-
-### Running EC2 Instances
-
-EC2 instances used during the networking exercises.
-
-![Running EC2 Instances](docs/screenshots/running-instances.png)
-
-### Successful Connectivity Test
-
-Evidence of a successful network connectivity test.
-
-![Successful Connectivity Test](docs/screenshots/connection-successful.png)
-
-### Connectivity Troubleshooting
-
-Evidence collected while diagnosing a connection failure.
-
-![Connectivity Troubleshooting](docs/screenshots/connection-troubleshooting.png)
-## AWS Infrastructure
-
-### VPC
+#### VPC
 
 - VPC CIDR: `172.31.0.0/16`
 - VPC ID: created for this lab
 
-### Subnet
+#### Subnet
 
 - Subnet CIDR: `172.31.32.0/20`
 - Availability Zone: `eu-north-1b`
 - Subnet ID: created for this lab
 - Public IPv4 address assignment: Enabled
 
-### Route Table
+#### Route Table
 
 - Route table: created for this lab
 
@@ -155,12 +161,12 @@ Routes:
 | `172.31.0.0/16` | Local | Active |
 | `0.0.0.0/0` | Internet Gateway | Active |
 
-### Internet Gateway
+#### Internet Gateway
 
 - Internet Gateway: created for this lab
 - Used to provide internet connectivity for the public subnet.
 
-### EC2 Instance
+#### EC2 Instance
 
 - Instance type: `t3.micro`
 - Operating system: Ubuntu 24.04 LTS
@@ -168,7 +174,7 @@ Routes:
 - Private IP: assigned dynamically by AWS
 - Network interface: `ens5`
 
-### Security Group
+#### Security Group
 
 - Name: `day2-networking-sg`
 
@@ -179,7 +185,7 @@ Inbound rules used during the lab:
 | TCP | 22 | My IP | SSH administration |
 | TCP | 80 | `0.0.0.0/0` | HTTP access |
 
-### Network ACL
+#### Network ACL
 
 - Network ACL: created for this lab
 
@@ -192,9 +198,11 @@ Default lab rules:
 
 The default `*` rules act as the catch-all deny rules after the numbered rules are evaluated.
 
-## Connectivity Testing
 
-### Test 1 — Security Group Blocking HTTP
+### Connectivity Testing
+
+
+#### Test 1 — Security Group Blocking HTTP
 
 The Nginx service was running successfully on the EC2 instance.
 
@@ -215,7 +223,7 @@ After adding this inbound Security Group rule:
 
 the HTTP request from the Mac returned `HTTP/1.1 200 OK`.
 
-### What this demonstrated
+#### What this demonstrated
 
 A service can be running correctly on an EC2 instance while external connectivity is blocked by the Security Group.
 
@@ -223,7 +231,7 @@ The Security Group controls traffic reaching the instance network interface.
 
 ---
 
-### Test 2 — Network ACL Blocking HTTP
+#### Test 2 — Network ACL Blocking HTTP
 
 After confirming that the Security Group allowed HTTP traffic, a temporary Network ACL rule was added:
 
@@ -245,7 +253,7 @@ The temporary NACL rule was then removed.
 
 After removing the deny rule, the same HTTP request once again returned `HTTP/1.1 200 OK`.
 
-### Key Lesson
+#### Key Lesson
 
 Traffic must successfully pass through the relevant network controls before it can reach the application.
 
@@ -273,11 +281,13 @@ The experiment demonstrated the difference between:
 - **Security Groups** — stateful, instance/network-interface level
 - **Network ACLs** — stateless, subnet level
 
-## Linux Networking and Troubleshooting
+
+### Linux Networking and Troubleshooting
+
 
 The EC2 instance was inspected using standard Linux networking tools.
 
-### Network Interface
+#### Network Interface
 
 The following command was used to inspect the primary network interface:
 
@@ -289,7 +299,7 @@ The interface showed the private IPv4 address:
 
 This confirmed that the EC2 instance was attached to the expected subnet.
 
-### Routing Table
+#### Routing Table
 
 The routing table was inspected with:
 
@@ -304,7 +314,7 @@ The default route sends traffic for destinations outside the local subnet throug
 
 The `172.31.32.0/20` route represents the directly connected subnet.
 
-### Local Service Testing
+#### Local Service Testing
 
 Nginx was tested locally from the EC2 instance:
 
@@ -312,7 +322,7 @@ Nginx was tested locally from the EC2 instance:
 
 A successful `HTTP 200 OK` response confirmed that the web server itself was functioning.
 
-### External Connectivity Testing
+#### External Connectivity Testing
 
 HTTP connectivity was tested from the Mac using:
 
@@ -326,7 +336,7 @@ This test was useful for distinguishing between:
 - Network ACL restrictions
 - AWS routing problems
 
-### Troubleshooting Methodology
+#### Troubleshooting Methodology
 
 The lab followed a layered troubleshooting approach:
 
@@ -343,19 +353,21 @@ The lab followed a layered troubleshooting approach:
 
 This approach helps isolate the layer responsible for a connectivity failure instead of changing multiple components at once.
 
-## Lessons Learned
 
-### 1. EC2 Has Multiple Networking Layers
+### Lessons Learned
+
+
+#### 1. EC2 Has Multiple Networking Layers
 
 An EC2 instance does not communicate directly with the internet. Traffic passes through multiple AWS networking components, including the subnet, route table, Internet Gateway, Network ACL, and Security Group.
 
-### 2. Private and Public IP Addresses Have Different Roles
+#### 2. Private and Public IP Addresses Have Different Roles
 
 The EC2 instance used a private IPv4 address inside the VPC while AWS provided a public IPv4 address for internet communication.
 
 The private address is used for communication inside the VPC, while the public address provides external reachability when the relevant AWS networking configuration allows it.
 
-### 3. Route Tables Determine Where Traffic Goes
+#### 3. Route Tables Determine Where Traffic Goes
 
 The route:
 
@@ -363,17 +375,17 @@ The route:
 
 allowed traffic destined for external networks to leave the VPC through the Internet Gateway.
 
-### 4. Security Groups Are Stateful
+#### 4. Security Groups Are Stateful
 
 Security Groups operate at the instance/network-interface level and are stateful. When an inbound connection is permitted, the response traffic is automatically permitted for that established connection.
 
-### 5. Network ACLs Are Stateless
+#### 5. Network ACLs Are Stateless
 
 Network ACLs operate at the subnet level and are stateless. In more restrictive configurations, both inbound and outbound traffic must be explicitly permitted.
 
 NACL rules are evaluated in ascending rule-number order, and the first matching rule is applied.
 
-### 6. Local Testing and External Testing Are Different
+#### 6. Local Testing and External Testing Are Different
 
 A successful:
 
@@ -385,13 +397,15 @@ It does not prove that the service is reachable from the internet.
 
 External connectivity requires the complete network path to be correctly configured.
 
-### 7. Change One Network Layer at a Time
+#### 7. Change One Network Layer at a Time
 
 During troubleshooting, changing multiple networking components simultaneously makes it difficult to identify the cause of a failure.
 
 This lab intentionally changed one control at a time and retested the connection after each change.
 
-## Cleanup
+
+### Cleanup
+
 
 For a temporary lab environment, unused AWS resources should be stopped or terminated after testing to avoid unnecessary charges.
 
@@ -404,10 +418,16 @@ Resources created or modified during this lab included:
 - VPC networking components
 - Nginx web server
 
-## Conclusion
+
+### Conclusion
+
 
 This project provided hands-on experience with AWS VPC networking and demonstrated how traffic flows from an external client to an EC2-hosted web server.
 
 The lab also demonstrated practical troubleshooting by intentionally introducing network failures and identifying which layer was responsible for blocking connectivity.
 
 The main goal was not only to configure the environment, but to understand how each networking layer contributes to successful connectivity.
+
+## Author
+
+**Umar Arshad** · [GitHub](https://github.com/umararshad0)
