@@ -19,6 +19,8 @@ The environment includes:
 
 The lab also includes controlled networking tests where Security Group and Network ACL rules were intentionally changed to observe how they affect connectivity.
 
+> **Scope:** This repository is a lab record with documentation and screenshots. It does not include Terraform, CloudFormation, or scripts to recreate the AWS resources. The CIDRs and settings below describe this lab and should be adapted to your own VPC.
+
 ## Architecture
 
 The lab uses a simplified representation of the AWS networking components involved in internet connectivity:
